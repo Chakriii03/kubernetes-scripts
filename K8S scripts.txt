@@ -1,0 +1,217 @@
+TASK-1
+kind: Pod
+apiVersion: v1
+metadata:
+  name: jspiders
+spec:
+  containers:
+    - name: sample1
+      image: ubuntu
+      command: ["/bin/bash", "-c", "while true; do echo Hi everyone; sleep 5; done"]
+  restartPolicy: Never      #Default to Always
+
+
+TASK-2
+kind: Pod
+apiVersion: v1
+metadata:
+  name: jspiders
+spec:
+  containers:
+    - name: sample1
+      image: ubuntu
+      command: ["/bin/bash", "-c", "while true; do echo Hi everyone; sleep 5; done"]
+    - name: sample1
+      image: ubuntu
+      command: ["/bin/bash", "-c", "while true; do echo Hi everyone; sleep 5; done"]
+  restartPolicy: Never      #Default to Always
+
+
+Worker node history
+
+      vi kube.sh
+      sh kube.sh cat kube.sh 
+      kubelet --version
+      sudo kubeadm reset pre-flight checks
+      sudo kubeadm join 172.31.46.128:6443 --token c0lqy3.1tnql1919grjez5r         --discovery-token-ca-cert-hash sha256:ba0dfed9eae9d61b00e068d4e65cbd61af9126252bb56275950b7466e1ae0802 --v=5
+      docker --version
+      kubelet --version
+
+
+Master node history
+
+      vi kube.sh
+      sh kube.sh cat kube.sh 
+      kubelet --version
+      sudo kubeadm config images pull
+      sudo kubeadm init
+      mkdir -p $HOME/.kube
+      kubectl get nodes
+      kubectl get pods
+      vi pod.yml
+     kubectl apply -f pod.yml 
+     kubectl get pods
+     kubectl delete -f pod.yml 
+     kubectl get pods
+     kubectl get nodes
+     kubectl apply -f 
+     https://raw.githubusercontent.com/projectcalico/calico/v3.26.0/manifests/calico.yaml
+     kubectl get pods
+     kubectl get nodes
+     cat pod.yml 
+     ls
+     kubectl apply -f pod.yml 
+     kubectl get pods
+     kubectl get pods -o wide
+    kubectl describe pod jspiders
+     kubectl get pods
+     kubectl logs -f jspiders
+     kubectl logs pod jspiders
+     kubectl logs -f jspiders
+     kubectl delete -f pod.yml 
+     kubectl get pods
+     vi pod.yml 
+     cat pod.yml 
+     kubectl apply -f pod.yml 
+     kubectl get pods
+     kubectl get pods -o wide
+     kubectl describe pod jspiders
+     kubectl log -f jspiders -c c1
+     kubectl logs -f jspiders -c c1
+     kubectl delete -f pod.yml 
+
+
+
+	TASK-3   CREATE POD WITH 1 CONTAINER WITH NGINX IMAGE & ASSIGN PORT NUMBER 80
+
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: flipkart
+spec:
+  containers:
+    - name: login
+      image: nginx
+      ports:
+        - containerPort: 80
+       
+
+
+       vi pod.yml
+      kubectl apply -f pod.yml
+      kubectl get pods
+     kubectl get pods -o wide
+     curl 192.168.171.65:80
+    kubectl delete -f pod.yml
+
+
+TASK-4 LABEL SELECTOR
+
+----//create a task with labels(used to find the individual containers by label name)//----
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: jspiders
+  labels:
+    department: DevOps
+    batch: jddw3
+spec: 
+  containers:
+    - name: demo
+      image: ubuntu
+      command: ["/bin/bash", "-c", "while true; do echo hi everyone; sleep 5; done"]
+
+
+ vi lable.yml
+     kubectl apply -f lable.yml
+     kubectl get pods
+     kubectl get pods -o wide
+     kubectl get pods --show-labels
+     kubectl label pod testfreshers name=chakri
+     kubectl get pods
+     kubectl get pods -l department=developer
+     kubectl get pods -l department!=developer
+     kubectl get pods -l batch!= marcos
+    kubectl delete -f lable.yml
+
+
+TASK-5 REPLICATION CONTROLLER
+
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: flipkart
+spec:
+  replicas: 2
+  selector:
+    app: nginx
+  template:
+    metadata:
+      name: signup
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: signupemail
+          image: nginx
+          ports:
+          - containerPort: 80
+
+ vi replica.yml
+      kubectl apply -f replica.yml
+     vi replica.yml
+     kubectl apply -f replica.yml
+     vi replica.yml
+     kubectl apply -f replica.yml
+     kubectl get rc
+     kubectl get po
+     kubectl delete pod flipkart-t9rkr
+     kubectl get po
+     kubectl get pods --show-labels
+     kubectl get pods -l app=nginx
+     kubectl get rc
+    kubectl describe rc flipkart
+     kubectl scale --replicas=4 rc flipkart
+     kubectl get rc
+     kubectl get po
+     kubectl scale --replicas=1 rc flipkart
+     kubectl get rc
+     kubectl get po
+    kubectl logs -f flipkart-qmqvn
+     kubectl get pods
+     kubectl get pods -o wide
+     curl 192.168.171.66
+    kubectl logs -f flipkart-qmqvn
+     kubectl -f rc
+     kubectl delete -f replica.yml
+
+TASK-5 REPLICA SET
+
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: jsp
+spec:
+  replicas: 2
+  selector:
+    matchExpressions:
+    - {key: myname, operator: In, values: [qspider, jspider, pyspider]}
+    - {key: env, operator: NotIn, values: [skillnary]}
+  template:
+    metadata:
+      name: sak
+      labels:
+        myname: qspider
+    spec:
+      containers:
+        - name: abc
+          image: ubuntu
+          command: ["/bin/bash", "-c", "while true; do echo hello world; sleep 3; done"]
+
+
+
+
+
+
